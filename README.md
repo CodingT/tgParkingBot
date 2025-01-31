@@ -26,5 +26,5 @@ DOCKER
 3.Run container: docker run --rm --env-file .env abocman/tg-parking-bot  
 
 Or schedule with crontab:  
-0 19 * * sat /usr/bin/docker run --rm tg-parking-bot >> /var/log/parkingBot.log 2>&1
+0 19 * * sat /usr/bin/docker run --rm --env-file .env abocman/tg-parking-bot >> /var/log/parkingBot.log 2>&1
 
