@@ -4,6 +4,27 @@ and will send to your Telegram notification if there is a Street Cleaning Suspen
 ["2025-01-01 (Wednesday): SUSPENDED - Alternate side parking and meters are suspended for New Year's Day.",
  "2025-01-06 (Monday): SUSPENDED - Alternate side parking is suspended for Three Kings' Day. Meters are in effect."]
 
+How to run:
+ Create local Python Env: python -m venv tgParkingBotEnv 
+ Activate it : source /home/user/tgParkingBot/tgParkingBotEnv/bin/activate
+ Install pip packages:  pip instal -r requirements.txt
+ In same directory create a new '.env' file with your secrets values for NYC 311 and Telegram 
+    ( API_KEY from https://api-portal.nyc.gov/ ; BOT_TOKEN and CHAT_ID from  https://core.telegram.org/api )
+ Run: python tgParkingBot.py
+
  can be scheduled to run with crontab ex. every Saturday 7 Pm:
 
  0 19 * * sat /bin/bash -c 'source /home/user/tgParkingBot/tgParkingBotEnv/bin/activate && python /home/user/tgParkingBot/tgParkingBot.py' >> /var/log/parkingBot.log 2>&1
+
+
+
+DOCKER
+
+Download docker image locally: docker pull abocman/tg-parking-bot
+In same directory create '.env' file with your secrets values of NYC 311 api and Telegram tokens
+( API_KEY from https://api-portal.nyc.gov/ ; BOT_TOKEN and CHAT_ID from https://core.telegram.org/api )
+Run container: docker run --rm --env-file .env abocman/tg-parking-bot
+
+Or schedule with crontab:
+0 19 * * sat /usr/bin/docker run --rm tg-parking-bot >> /var/log/parkingBot.log 2>&1
+
